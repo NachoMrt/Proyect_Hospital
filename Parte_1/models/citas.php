@@ -1,5 +1,5 @@
 <?php
-require_once "Conexion.php";
+require_once 'config/conexion.php';
 
 class Cita extends Conexion {
 
