@@ -4,9 +4,9 @@
 <a href='?c=Cita&a=crear'> Nuevo </a> <!--  -> IMPORTANTE !!!! -->
 <ul>
     <?php foreach($citas as $cita): ?>
-        <li><?= $cita['id_medico']?> - <?= $cita['dia']?> - <?=$cita['hora']?> - <?=$cita['nombre']?> - <?=$cita['DNI']?> - <?=$cita['id_paciente']?>
-            <a href='?c=Cita&a=editar&id=<?= $cita['id_paciente']?>'> Editar </a> 
-            <a href='?c=Cita&a=eliminar&id=<?= $cita['id_paciente']?>'> Eliminar </a>
+        <li><?= $cita['Id_medico']?> - <?= $cita['dia']?> - <?=$cita['hora']?> - <?=$cita['nombre']?> - <?=$cita['DNI']?> - <?=$cita['id_paciente']?>
+            <a href='?c=Cita&a=editar&Id_medico=<?= $cita['Id_medico']?>'> Editar </a> 
+            <a href='?c=Cita&a=eliminar&Id_medico=<?= $cita['Id_medico']?>'> Eliminar </a>
         </li>
     <?php endforeach;?>
 </ul>

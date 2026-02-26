@@ -1,14 +1,14 @@
 
 <?php require 'views/header.php'; ?>
 
-<form method='post'>
+<form method='post' action="">
    
-    <input name='id_medico' value='<?= $data['id_medico']?>'>
-    <input name='dia' value='<?= $data['dia']?>'>
-    <input name='hora' value='<?= $data['hora']?>'>
-    <input name='nombre' value='<?= $data['nombre']?>'>
-     <input name='DNI' value='<?= $data['DNI']?>'>
-     <input type="hidden" name="id_paciente" value="<?= $data['id_paciente'] ?>">
+    <input name='Id_medico' value='<?= $data['Id_medico']?>' type="text">
+    <input name='dia' value='<?= $data['dia']?>' type="date">
+    <input name='hora' value='<?= $data['hora']?>' type="time">
+    <input name='nombre' value='<?= $data['nombre']?>' type="text">
+     <input name='DNI' value='<?= $data['dni']?>' type="text">
+     <input type="hidden" name="Id_medico" value="<?= $data['Id_medico']?>">
     <button> Actualizar </button>
 </form>
 

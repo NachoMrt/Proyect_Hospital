@@ -1,7 +1,7 @@
 <?php
 
 
-$c = $_GET['c'] ?? 'Paciente' ?? 'Citas';
+$c = $_GET['c'] ?? 'Paciente' ?? 'Cita';
 
 $a = $_GET['a'] ?? 'index';
 

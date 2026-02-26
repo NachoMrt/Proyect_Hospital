@@ -2,7 +2,7 @@
 <?php require 'views/header.php'; ?>
 
 <form method='post'>
-    <input name='id_medico'>
+    <input name='Id_medico'>
     <input name='dia'>
     <input name='hora'>
     <input name='nombre'>
