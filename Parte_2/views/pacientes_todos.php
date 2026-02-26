@@ -21,6 +21,8 @@
 <div>
     <a href='?c=Paciente&a=crear'>Nuevo Paciente</a>
 </div>
-
+<div>
+    <a href='?c=Tratamiento'>Ver tratamientes</a>
+</div>
 
 </main>

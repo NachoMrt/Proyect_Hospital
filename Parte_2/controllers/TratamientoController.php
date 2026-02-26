@@ -9,7 +9,7 @@ class TratamientoController
     {
         $t = new Tratamiento();
         $tratamientos = $t->obtenerTodos();
-        require 'views/tratamiento_todos.php';
+        require 'views/tratamientos_todos.php';
     }
     public function crear()
     {
