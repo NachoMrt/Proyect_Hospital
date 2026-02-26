@@ -1,6 +1,6 @@
 <?php
 
-require_once __DIR__ . '/../../Parte_1/models/pacientes.php';
+require_once __DIR__ . '/../models/pacientes.php';
 class PacienteController
 {
     public function index()

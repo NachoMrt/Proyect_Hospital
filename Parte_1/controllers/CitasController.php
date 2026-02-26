@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__.'../../Parte_1/models/citas.php';
+require_once __DIR__.'/../models/citas.php';
 
 class CitasController {
     public function index() {

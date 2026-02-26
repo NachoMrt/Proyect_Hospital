@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 26-02-2026 a las 09:30:13
+-- Tiempo de generación: 26-02-2026 a las 13:09:57
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -20,6 +20,8 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `hospital`
 --
+CREATE DATABASE IF NOT EXISTS `hospital` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `hospital`;
 
 -- --------------------------------------------------------
 
@@ -47,6 +49,13 @@ CREATE TABLE `departamentos` (
   `nombre` varchar(100) NOT NULL,
   `seccion` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `departamentos`
+--
+
+INSERT INTO `departamentos` (`id_departamento`, `nombre`, `seccion`) VALUES
+(1, 'Cardiologia', 'Cardiologia');
 
 -- --------------------------------------------------------
 
@@ -127,6 +136,13 @@ CREATE TABLE `medico` (
   `id_departamento` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Volcado de datos para la tabla `medico`
+--
+
+INSERT INTO `medico` (`id_medico`, `nombre`, `DNI`, `id_paciente`, `id_departamento`) VALUES
+(1, 'Jose', 'Y464161d', 1, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -138,6 +154,14 @@ CREATE TABLE `pacientes` (
   `nombre` varchar(100) NOT NULL,
   `DNI` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `pacientes`
+--
+
+INSERT INTO `pacientes` (`id_paciente`, `nombre`, `DNI`) VALUES
+(0, 'Ana', 'P848J'),
+(1, 'Lucia', 'Y85465213T');
 
 -- --------------------------------------------------------
 
@@ -151,6 +175,13 @@ CREATE TABLE `tratamientos` (
   `duracion` varchar(100) NOT NULL,
   `id_paciente` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `tratamientos`
+--
+
+INSERT INTO `tratamientos` (`id_tratamiento`, `nombre`, `duracion`, `id_paciente`) VALUES
+(1, 'Cardiología', '12 day', 0);
 
 --
 -- Índices para tablas volcadas

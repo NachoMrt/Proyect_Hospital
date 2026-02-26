@@ -1,6 +1,6 @@
 <?php
 
-require_once __DIR__ . '/../../Parte_1/models/tratamientos.php';
+require_once __DIR__ . '/../models/tratamientos.php';
 
 
 class TratamientoController
