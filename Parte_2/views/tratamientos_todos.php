@@ -1,5 +1,6 @@
-<?php require 'views/header.php'; ?>
-
+<?php require 'views/header.php';
+require_once __DIR__."/../controllers/PacienteController.php"
+?>
 <main>
     <div>Lista de Tratamientos</div>
     <table>
@@ -15,7 +16,7 @@
                 <tr>
                     <td><strong><?= htmlspecialchars($t['nombre']) ?></strong></td>
                     <td><?= htmlspecialchars($t['duracion']) ?></td>
-                    <td><?= htmlspecialchars($t['id_paciente']) ?></td>
+                    <td><?= htmlspecialchars((new PacienteController())->getById($t['id_paciente'])['nombre']) ?></td>
                 </tr>
             <?php endforeach; ?>
         </tbody>

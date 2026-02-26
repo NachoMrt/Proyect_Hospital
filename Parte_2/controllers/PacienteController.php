@@ -19,4 +19,9 @@ class PacienteController
         }
         require 'views/paciente_crear.php';
     }
+
+    public function getById($id) {
+        $p = new Paciente();
+        return $p->getById($id);
+    }
 }
