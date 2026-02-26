@@ -1,10 +1,10 @@
 <?php
-require_once __DIR__.'../../Parte_1/models/citas.php';
+require_once __DIR__ . '/../../Parte_1/models/citas.php';
 
 class CitasController {
     public function index() {
         $c = new Cita();
-        $clientes = $c->obtenerTodosCitas();
+        $citas = $c->obtenerTodosCitas();
         require 'views/citas_lista.php';
     }
     public function crear() {

@@ -1,7 +1,7 @@
 <?php
 
 
-$c = $_GET['c'] ?? 'Paciente';
+$c = $_GET['c'] ?? 'Paciente'||'Citas';
 
 $a = $_GET['a'] ?? 'index';
 
@@ -11,3 +11,8 @@ $controllerName = $c . 'Controller';
 $controller = new $controllerName();
 
 $controller->$a();
+// $cit = $_GET['cit'] ?? 'Citas';
+
+// require_once 'controllers/' . $cit . 'Controller.php';
+// $controllerName = $cit . 'Controller';
+// $controller = new $controllerName();

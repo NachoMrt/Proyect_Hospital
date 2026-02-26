@@ -3,7 +3,7 @@
 
 <a href='?c=Cita&a=crear'> Nuevo </a> <!--  -> IMPORTANTE !!!! -->
 <ul>
-    <?php foreach($Citas as $cita): ?>
+    <?php foreach($citas as $cita): ?>
         <li><?= $cita['id_medico']?> - <?= $cita['dia']?> - <?=$cita['hora']?> - <?=$cita['nombre']?> - <?=$cita['DNI']?> - <?=$cita['id_paciente']?>
             <a href='?c=Cita&a=editar&id=<?= $cita['id_paciente']?>'> Editar </a> 
             <a href='?c=Cita&a=eliminar&id=<?= $cita['id_paciente']?>'> Eliminar </a>
@@ -11,7 +11,7 @@
     <?php endforeach;?>
 </ul>
 
-<?php require 'views/footer.php'; ?>
+
 
 
 <!--

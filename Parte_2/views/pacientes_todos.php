@@ -24,5 +24,5 @@
 <div>
     <a href='?c=Tratamiento'>Ver tratamientes</a>
 </div>
-
+    <a href='?c=Citas'>Citas</a>
 </main>

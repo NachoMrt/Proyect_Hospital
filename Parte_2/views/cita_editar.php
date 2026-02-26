@@ -12,6 +12,6 @@
     <button> Actualizar </button>
 </form>
 
-<?php require 'views/footer.php'; ?>
+
 
 
