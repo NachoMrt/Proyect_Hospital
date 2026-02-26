@@ -1,12 +1,11 @@
 <?php
 
-require_once '../../Parte_1/models/pacientes.php';
-
+require_once __DIR__ . '/../../Parte_1/models/pacientes.php';
 class PacienteController
 {
     public function index()
     {
-        $p = new Medico();
+        $p = new Paciente();
         $pacientes = $p->obtenerTodos();
         require 'views/pacientes_todos.php';
     }
