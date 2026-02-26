@@ -1,5 +1,9 @@
 <?php
+<<<<<<< HEAD:Parte_2/controllers/CitasController.php
 require_once __DIR__ . '/../../Parte_1/models/citas.php';
+=======
+require_once __DIR__.'/../models/citas.php';
+>>>>>>> 438b779ade00fa33b70d38faf66ad29d68a30d96:Parte_1/controllers/CitasController.php
 
 class CitasController {
     public function index() {
