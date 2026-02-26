@@ -1,6 +1,6 @@
 <?php
 
-require_once '../../Parte_1/models/medicos.php';
+require_once __DIR__ . '/../../Parte_1/models/medicos.php';
 
 class MedicoController
 {

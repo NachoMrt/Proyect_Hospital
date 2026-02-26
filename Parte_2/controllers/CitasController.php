@@ -28,5 +28,4 @@ class CitasController {
         (new Cita())->delete($_GET['id_paciente']);
         header("Location: index.php");
     }
-
 }
