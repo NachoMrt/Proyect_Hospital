@@ -1,140 +1,103 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Gestión de Médicos</title>
-</head>
-<body>
+<?php require 'views/header.php'; ?>
 
+<main class="main-content">
+    <div class="gestion-header">
+        <h1>🩺 Personal Médico</h1>
+        <p style="color: var(--verde-oliva);">Hospital Último Aliento - Gestión de Facultativos</p>
+    </div>
 
-  <!-- LISTAR MÉDICOS -->
-  
+    <div class="grid-formularios">
+        
+        <div class="card-medico">
+            <h2>➕ Agregar Médico</h2>
+            <form id="formCrearMedico">
+                <input type="text" name="nombre" class="input-hosp" placeholder="Nombre completo" required>
+                <input type="text" name="DNI" class="input-hosp" placeholder="DNI" required>
+                <input type="number" name="id_paciente" class="input-hosp" placeholder="ID Paciente (Opcional)">
+                <input type="number" name="id_departamento" class="input-hosp" placeholder="ID Departamento">
+                <button type="submit" class="btn-accion btn-guardar">Guardar Médico</button>
+            </form>
+        </div>
 
-  <h1>Lista de Médicos</h1>
-  <ul id="listaMedicos"></ul>
+        <div class="card-medico" style="border-top-color: var(--azul-oscuro);">
+            <h2>🔄 Actualizar Datos</h2>
+            <form id="formActualizarMedico">
+                <input type="number" name="id_medico" class="input-hosp" placeholder="ID del Médico a editar" required>
+                <input type="text" name="nombre" class="input-hosp" placeholder="Nuevo Nombre">
+                <input type="text" name="DNI" class="input-hosp" placeholder="Nuevo DNI">
+                <button type="submit" class="btn-accion btn-actualizar">Aplicar Cambios</button>
+            </form>
+        </div>
 
-  <script>
-    fetch('http://localhost/Certificado/REST/public/index.php/medico')
-      .then(response => response.json())
-      .then(data => {
-        const lista = document.getElementById('listaMedicos');
-        lista.innerHTML = "";
+        <div class="card-medico" style="border-top-color: #ff4d4d;">
+            <h2>🗑️ Baja de Médico</h2>
+            <p style="font-size: 0.8rem; color: #666;">Introduce el ID para eliminar el registro.</p>
+            <input type="number" id="idEliminarMedico" class="input-hosp" placeholder="ID Médico">
+            <button onclick="eliminarMedico()" class="btn-accion btn-eliminar">Eliminar Permanentemente</button>
+        </div>
+    </div>
 
-        data.forEach(medico => {
-          lista.innerHTML += `
-            <li>
-              ID: ${medico.id_medico} |
-              Nombre: ${medico.nombre} |
-              DNI: ${medico.DNI} |
-              ID Paciente: ${medico.id_paciente ?? "Sin asignar"} |
-              ID Departamento: ${medico.id_departamento ?? "Sin asignar"}
-            </li>
-          `;
-        });
-      })
-      .catch(error => console.error("Error:", error));
-  </script>
+    <section class="tabla-contenedor" style="padding: 20px; background: white; border-radius: 15px;">
+        <h2>Lista de Médicos Activos</h2>
+        <ul id="listaMedicos" class="lista-medicos">
+            <p style="text-align: center; color: #999;">Cargando personal médico...</p>
+        </ul>
+    </section>
+</main>
 
+<script>
+    const API_URL = 'http://localhost/Certificado/REST/public/index.php/medico';
 
- 
-  <!-- CREAR MÉDICO -->
-  
-  <h2>Agregar Médico</h2>
-
-  <form id="formCrearMedico">
-    <input type="text" name="nombre" placeholder="Nombre" required>
-    <input type="text" name="DNI" placeholder="DNI" required>
-    <input type="number" name="id_paciente" placeholder="ID Paciente">
-    <input type="number" name="id_departamento" placeholder="ID Departamento">
-    <button type="submit">Guardar</button>
-  </form>
-
-  <script>
-    document.getElementById("formCrearMedico").addEventListener("submit", function(e) {
-      e.preventDefault();
-
-      fetch('http://localhost/Certificado/REST/public/index.php/medico', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          nombre: this.nombre.value,
-          DNI: this.DNI.value,
-          id_paciente: this.id_paciente.value || null,
-          id_departamento: this.id_departamento.value || null
-        })
-      })
-      .then(response => response.json())
-      .then(data => {
-        alert("Médico agregado correctamente");
-        location.reload();
-      })
-      .catch(error => console.error("Error:", error));
-    });
-  </script>
-
-
-  
-  <!-- ACTUALIZAR MÉDICO -->
-  
-  <h2>Actualizar Médico</h2>
-
-  <form id="formActualizarMedico">
-    <input type="number" name="id_medico" placeholder="ID Médico" required>
-    <input type="text" name="nombre" placeholder="Nuevo Nombre" required>
-    <input type="text" name="DNI" placeholder="Nuevo DNI" required>
-    <input type="number" name="id_paciente" placeholder="ID Paciente">
-    <input type="number" name="id_departamento" placeholder="ID Departamento">
-    <button type="submit">Actualizar</button>
-  </form>
-
-  <script>
-    document.getElementById("formActualizarMedico").addEventListener("submit", function(e) {
-      e.preventDefault();
-      const id = this.id_medico.value;
-
-      fetch(`http://localhost/Certificado/REST/public/index.php/medico/${id}`, {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          nombre: this.nombre.value,
-          DNI: this.DNI.value,
-          id_paciente: this.id_paciente.value || null,
-          id_departamento: this.id_departamento.value || null
-        })
-      })
-      .then(response => response.json())
-      .then(data => {
-        alert("Médico actualizado correctamente");
-        location.reload();
-      })
-      .catch(error => console.error("Error:", error));
-    });
-  </script>
-
-
-  
-  <!-- DELETE: ELIMINAR MÉDICO -->
-  
-  <h2>Eliminar Médico</h2>
-
-  <input type="number" id="idEliminarMedico" placeholder="ID Médico">
-  <button onclick="eliminarMedico()">Eliminar</button>
-
-  <script>
-    function eliminarMedico() {
-      const id = document.getElementById("idEliminarMedico").value;
-
-      fetch(`http://localhost/Certificado/REST/public/index.php/medico/${id}`, {
-        method: 'DELETE'
-      })
-      .then(response => response.json())
-      .then(data => {
-        alert("Médico eliminado correctamente");
-        location.reload();
-      })
-      .catch(error => console.error("Error:", error));
+    // Función para Listar
+    function cargarMedicos() {
+        fetch(API_URL)
+            .then(response => response.json())
+            .then(data => {
+                const lista = document.getElementById('listaMedicos');
+                lista.innerHTML = "";
+                data.forEach(medico => {
+                    lista.innerHTML += `
+                        <li class="medico-item">
+                            <div class="medico-info">
+                                <span class="medico-id">ID: ${medico.id_medico}</span>
+                                <strong>${medico.nombre}</strong> | DNI: ${medico.DNI}
+                            </div>
+                            <div style="font-size: 0.85rem; color: #717332;">
+                                Dep: ${medico.id_departamento ?? "General"}
+                            </div>
+                        </li>
+                    `;
+                });
+            })
+            .catch(error => console.error("Error:", error));
     }
-  </script>
 
-</body>
-</html>
+    // Evento Crear
+    document.getElementById("formCrearMedico").addEventListener("submit", function(e) {
+        e.preventDefault();
+        fetch(API_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                nombre: this.nombre.value,
+                DNI: this.DNI.value,
+                id_paciente: this.id_paciente.value || null,
+                id_departamento: this.id_departamento.value || null
+            })
+        })
+        .then(() => { alert("Médico agregado"); cargarMedicos(); this.reset(); });
+    });
+
+    // Función Eliminar
+    function eliminarMedico() {
+        const id = document.getElementById("idEliminarMedico").value;
+        if(!id) return alert("Escribe un ID");
+        fetch(`${API_URL}/${id}`, { method: 'DELETE' })
+        .then(() => { alert("Médico eliminado"); cargarMedicos(); });
+    }
+
+    // Carga inicial
+    cargarMedicos();
+</script>
+
+<?php require 'views/footer.php'; ?>

@@ -1,0 +1,85 @@
+/* Importamos la fuente Inter para un look moderno */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Poppins:wght@600&display=swap');
+
+.main-content {
+    font-family: 'Inter', sans-serif;
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 20px;
+    color: var(--azul-oscuro);
+}
+
+h1, h2 {
+    font-family: 'Poppins', sans-serif;
+    color: var(--azul-oscuro);
+}
+
+/* Contenedor de formularios (Grid) */
+.grid-formularios {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    margin-bottom: 40px;
+}
+
+.card-medico {
+    background: var(--blanco);
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    border-top: 5px solid var(--verde-medio);
+}
+
+.card-medico h2 {
+    font-size: 1.2rem;
+    margin-top: 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Inputs y Botones */
+.input-hosp {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    box-sizing: border-box;
+}
+
+.btn-accion {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+    margin-top: 10px;
+}
+
+.btn-guardar { background: var(--verde-lima); color: var(--azul-oscuro); }
+.btn-actualizar { background: var(--azul-oscuro); color: var(--blanco); }
+.btn-eliminar { background: #ff4d4d; color: white; }
+
+/* Lista de Médicos Estilizada */
+.lista-medicos {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    gap: 10px;
+}
+
+.medico-item {
+    background: var(--blanco);
+    padding: 15px 20px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-left: 4px solid var(--verde-oliva);
+}
+
+.medico-info strong { color: var(--azul-oscuro); }
+.medico-id { font-size: 0.8rem; background: #eee; padding: 2px 8px; border-radius: 4px; }

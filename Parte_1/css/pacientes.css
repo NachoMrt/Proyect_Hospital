@@ -1,0 +1,109 @@
+/* Importamos una fuente más profesional y moderna */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Poppins:wght@500;700&display=swap');
+
+:root {
+    --fuente-principal: 'Inter', sans-serif;
+    --fuente-titulos: 'Poppins', sans-serif;
+}
+
+.main-content {
+    font-family: var(--fuente-principal);
+    max-width: 1100px;
+    margin: 40px auto;
+    color: var(--azul-oscuro);
+}
+
+h1, h3 {
+    font-family: var(--fuente-titulos);
+    font-weight: 700;
+}
+
+/* Encabezado */
+.gestion-header h1 {
+    font-size: 2rem;
+    margin-bottom: 5px;
+}
+
+.contador-badge {
+    background: var(--azul-oscuro); /* Cambiado de amarillo a azul oscuro */
+    color: var(--blanco);
+    padding: 8px 20px;
+    border-radius: 50px;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+/* Tarjeta de Registro */
+.card-registro {
+    background: var(--blanco);
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 10px 25px rgba(67, 79, 115, 0.05); /* Sombra azulada muy sutil */
+    border-left: 5px solid var(--verde-medio);
+}
+
+.input-control {
+    border: 2px solid #edf2f7;
+    padding: 12px;
+    border-radius: 10px;
+    transition: border-color 0.3s ease;
+}
+
+.input-control:focus {
+    outline: none;
+    border-color: var(--verde-medio);
+}
+
+/* Botones - ¡Adiós al amarillo feo! */
+.btn-guardar {
+    background: var(--verde-lima); /* Verde brillante de tu paleta */
+    color: var(--azul-oscuro);
+    font-family: var(--fuente-titulos);
+    font-weight: 600;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-guardar:hover {
+    background: var(--verde-medio);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(154, 217, 108, 0.4);
+}
+
+/* Navegación inferior */
+.btn-nav-azul {
+    background: var(--azul-oscuro);
+    color: var(--blanco);
+    padding: 12px 20px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.btn-nav-azul:hover {
+    background: var(--verde-oliva);
+}
+
+/* Tabla */
+.tabla-hospital {
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.tabla-hospital th {
+    background: #f8fafc;
+    color: var(--verde-oliva);
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 1px;
+    padding: 20px;
+}
+
+.tabla-hospital td {
+    padding: 20px;
+    border-bottom: 1px solid #f1f5f9;
+}

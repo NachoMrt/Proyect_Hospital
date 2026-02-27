@@ -1,6 +1,7 @@
 <?php
 
 require_once __DIR__ . '/../models/tratamientos.php';
+require_once __DIR__ . '/../models/pacientes.php';
 
 
 class TratamientoController
@@ -9,6 +10,7 @@ class TratamientoController
     {
         $t = new Tratamiento();
         $tratamientos = $t->obtenerTodos();
+        $pacientes = new Paciente()->obtenerTodos();
         require 'views/tratamientos_todos.php';
     }
     public function crear()

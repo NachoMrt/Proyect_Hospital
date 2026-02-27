@@ -1,0 +1,102 @@
+/* Variables de tu paleta */
+:root {
+    --azul-oscuro: #434F73;
+    --verde-medio: #9AD96C;
+    --verde-lima: #9BF244;
+    --amarillo-claro: #EEF26B;
+    --verde-oliva: #717332;
+    --blanco: #ffffff;
+}
+
+/* Contenedor Principal */
+.card-hospital {
+    background: var(--blanco);
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+}
+
+.dash-title {
+    text-align: center; 
+    color: var(--azul-oscuro);
+    font-size: 2.2rem;
+    margin-bottom: 10px;
+}
+
+.dash-subtitle {
+    text-align: center; 
+    color: var(--verde-oliva); 
+    margin-bottom: 40px;
+    font-size: 1.1rem;
+}
+
+/* Grid del Dashboard */
+.grid-dashboard {
+    display: grid; 
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); 
+    gap: 25px;
+}
+
+/* Tarjetas Individuales */
+.modulo-card {
+    padding: 30px 20px; 
+    border-radius: 15px; 
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid transparent;
+}
+
+.modulo-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+
+.modulo-icon {
+    font-size: 3rem; 
+    margin-bottom: 15px;
+    display: block;
+}
+
+.modulo-card h3 {
+    margin: 10px 0;
+    color: var(--azul-oscuro);
+}
+
+.modulo-card p {
+    font-size: 0.9rem;
+    color: #555;
+    margin-bottom: 20px;
+}
+
+/* Colores específicos por módulo (basados en tu paleta) */
+.bg-citas        { background-color: #f0f4ff; border-color: #d1dbff; } /* Azul sutil */
+.bg-pacientes    { background-color: #f2faf0; border-color: #dcfce7; } /* Verde sutil */
+.bg-medicos      { background-color: #fffdf2; border-color: #fef9c3; } /* Amarillo sutil */
+.bg-tratamientos { background-color: #f9fcf5; border-color: #ecfccb; } /* Lima sutil */
+
+/* Botón Personalizado */
+.btn-hosp {
+    background-color: var(--azul-oscuro);
+    color: var(--amarillo-claro) !important;
+    text-decoration: none; 
+    display: inline-block; 
+    padding: 10px 25px;
+    border-radius: 8px;
+    font-weight: bold;
+    transition: background 0.3s;
+}
+
+.btn-hosp:hover {
+    background-color: var(--verde-oliva);
+}
+
+/* Footer */
+.footer-hospital {
+    text-align: center;
+    padding: 40px 0;
+    background-color: var(--azul-oscuro);
+    color: var(--blanco);
+    margin-top: 50px;
+}
