@@ -24,10 +24,10 @@ class CitaController
         // En DOS pasos como método anterior de crear()
         $u = new Cita();
         if ($_POST) {
-            $u->update($_POST['Id_medico'], $_POST['dia'], $_POST['hora'], $_POST['nombre'], $_POST['dni'], $_POST['id_paciente']);
+            $u->update($_GET['Id_medico'], $_POST['dia'], $_POST['hora'], $_POST['nombre'], $_POST['DNI'], $_POST['id_paciente']);
             header("Location: index.php");
         }
-        $data = $u->obtenerPorMedico($_GET['Id_medico']);
+        $data = $u->obtenerPorMedico($_GET['Id_medico'])[0];
         require 'views/cita_editar.php';
     }
     public function eliminar()

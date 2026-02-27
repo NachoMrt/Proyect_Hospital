@@ -30,7 +30,7 @@ class Cita extends Conexion
     public function update($id_medico, $dia, $hora, $nombre, $dni, $id_paciente)
     {
         $stmt = $this->conexion->prepare(
-            "UPDATE citas SET id_paciente, dia=?, hora=?, nombre=?, dni=?  WHERE Id_medico=?"
+            "UPDATE citas SET id_paciente = ?, dia=?, hora=?, nombre=?, dni=?  WHERE Id_medico = ?"
         );
         $stmt->execute([$id_paciente, $dia, $hora, $nombre, $dni, $id_medico]);
     }
