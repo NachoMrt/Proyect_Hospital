@@ -20,8 +20,21 @@ class PacienteController
         require 'views/paciente_crear.php';
     }
 
-    public function getById($id) {
-        $p = new Paciente();
-        return $p->getById($id);
+    public function editar()
+    {
+        // En DOS pasos como método anterior de crear()
+        $u = new Paciente();
+        if ($_POST) {
+            $u->update($_POST['nombre'], $_POST['DNI'], $_GET['id_paciente']);
+            header("Location: index.php");
+        }
+        $data = $u->getById($_GET['id_tratamiento'])[0];
+        require 'views/paciente_editar.php';
+    }
+
+    public function eliminar()
+    {
+        (new Paciente())->delete($_GET['id_paciente']);
+        header("Location: index.php");
     }
 }

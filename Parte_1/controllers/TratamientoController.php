@@ -21,17 +21,35 @@ class TratamientoController
         require 'views/tratamiento_crear.php';
     }
 
-    public function obtenerPorPaciente()
+    public function obtenerPorId()
     {
-        if (isset($_GET['id_paciente'])) {
+        if (isset($_GET['id_tratamiento'])) {
 
-            $id = $_GET['id_paciente'];
+            $id = $_GET['id_tratamiento'];
 
             $tratamiento = new Tratamiento();
-            $tratamientos = $tratamiento->obtenerPorPaciente($id);
+            $tratamientos = $tratamiento->obtenerPorId($id);
             require 'views/tratamiento_lista.php';
         } else {
-            echo "Paciente no especificado";
+            echo "Tratamiento no especificado";
         }
+    }
+
+    public function editar()
+    {
+        // En DOS pasos como método anterior de crear()
+        $u = new Tratamiento();
+        if ($_POST) {
+            $u->update($_GET['nombre'], $_POST['duracion'], $_POST['id_paciente'], $_GET['id_tratamiento']);
+            header("Location: index.php");
+        }
+        $data = $u->obtenerPorId($_GET['id_tratamiento'])[0];
+        require 'views/tratamiento_editar.php';
+    }
+
+    public function eliminar()
+    {
+        (new Tratamiento())->delete($_GET['id_tratamiento']);
+        header("Location: index.php");
     }
 }

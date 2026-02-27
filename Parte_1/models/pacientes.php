@@ -32,4 +32,10 @@ class Paciente extends Conexion
         $stmt = $this->conexion->prepare($sql);
         return $stmt->execute([$id_paciente]);
     }
+    public function update($nombre, $DNI, $id_paciente)
+    {
+        $sql = "UPDATE pacientes SET nombre = ?, DNI = ? WHERE id_paciente = ?)";
+        $stmt = $this->conexion->prepare($sql);
+        return $stmt->execute([$nombre, $DNI, $id_paciente]);
+    }
 }
