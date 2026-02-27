@@ -1,0 +1,1 @@
+Dentro de views esta el index que enlaza las vistas de REST
