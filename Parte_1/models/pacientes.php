@@ -25,4 +25,11 @@ class Paciente extends Conexion
         $stmt = $this->conexion->prepare($sql);
         return $stmt->execute([$nombre, $dni]);
     }
+
+    public function delete($id_paciente)
+    {
+        $sql = "DELETE FROM pacientes WHERE Id_paciente = ?";
+        $stmt = $this->conexion->prepare($sql);
+        return $stmt->execute([$id_paciente]);
+    }
 }
