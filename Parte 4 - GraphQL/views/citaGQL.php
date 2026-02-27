@@ -6,7 +6,7 @@
     <title> CRUD MongoDB + PHP </title>
     <style>
         body {
-            background-color: #d4e2fe;
+            background-color: #fee8e8;
             width: 90%;
             max-width: 1200px;
             margin: 0 auto;
@@ -22,11 +22,12 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background-color: #6798fb;
+            background-color: #f8b4ba;
             padding: 10px 20px;
             position: sticky;
             top: 0;
         }
+
 
         .main-container {
             display: flex;
@@ -36,7 +37,7 @@
         }
 
         .sidebar-forms {
-            flex: 0 0 350px;
+            flex: 0 0 300px;
             position: sticky;
             top: 140px;
         }
@@ -46,7 +47,7 @@
         }
 
         .btn-pacientes {
-            background-color: #ff4b5d;
+            background-color: #6085ff;
             color: #333;
             padding: 8px 15px;
             text-decoration: none;
@@ -56,14 +57,14 @@
         }
 
         main {
-            background-color: #a1c0ff;
+            background-color: #ffd2d2;
             margin: 0 auto;
             padding: 20px;
         }
 
         .card_cita {
-            background-color: #d4e2fe;
-            border: 1px solid #b6ceff;
+            background-color: #fff6f6;
+            border: 1px solid #ddd;
             border-radius: 15px;
             padding: 15px;
             margin-bottom: 10px;
@@ -71,8 +72,8 @@
         }
 
         form {
-            background-color: #d4e2fe;
-            border: 1px solid #b6ceff;
+            background-color: #fff6f6;
+            border: 1px solid #ddd;
             border-radius: 15px;
             padding: 15px;
             margin-bottom: 10px;
@@ -109,42 +110,39 @@
 
 <body>
     <header>
-        <h1>API-REST-GrahpQL Pacientes</h1>
-        <a href="vistaQL.php" class="btn-pacientes">Ir a Citas</a>
+        <h1>API-REST-GrahpQL Citas</h1>
+        <a href="pacienteGQL.php" class="btn-pacientes">Ir a Pacientes</a>
+          <a href="index.php">Volver al index</a>
     </header>
     <main>
         <div class="main-container">
             <div class="sidebar-forms">
-                <h2>Agregar nuevo paciente</h2>
+
+                <h2>Crear cita</h2>
                 <form id="formularioPost">
 
-                    <label for="nombre">Nombre: </label>
-                    <input type="text" name="nombre" placeholder="Nombre paciente"><br>
+                    <label for="id_paciente">ID Paciente: </label>
+                    <input type="number" name="id_paciente" placeholder="ID paciente"><br>
 
-                    <label for="dni">DNI: </label>
-                    <input type="text" name="dni" placeholder="DNI"><br>
+                    <label for="id_medico">ID Médico: </label>
+                    <input type="number" name="id_medico" placeholder="ID medico"><br>
 
-                    <label for="fecha_nacimiento">Fecha de nacimiento: </label>
-                    <input type="text" name="fecha_nacimiento" placeholder="Fecha de nacimiento"><br>
-
-                    <label for="telefono">Telefeno: </label>
-                    <input type="text" name="telefono" placeholder="Telefono"><br>
+                    <label for="medico">Motivo: </label>
+                    <input type="text" name="motivo" placeholder="Motivo"><br>
 
                     <button type="submit"> Crear </button><br>
                 </form>
                 <script>
                     document.getElementById("formularioPost").addEventListener("submit", function (e) {
                         e.preventDefault();
-
                         const URL = "http://localhost/Certificado/01.Git/Hospital/Proyect_Hospital/Parte 4 - GraphQL/GraphQL/index.php";
-                        const nombre = this.nombre.value;
-                        const dni = this.dni.value;
-                        const fecha_nacimiento = this.fecha_nacimiento.value;
-                        const telefono = this.telefono.value;
+                        const id_paciente = parseInt(this.id_paciente.value);
+                        const id_medico = parseInt(this.id_medico.value);
+                        const motivo = this.motivo.value;
 
-                        async function crearPaciente() {
+                        async function crearCitas() {
                             const query = `
-        mutation { agregarPaciente(nombre: \"${nombre}\", dni: \"${dni}\", fecha_nacimiento: \"${fecha_nacimiento}\", telefono: \"${telefono}\") {id_paciente nombre dni fecha_nacimiento telefono}}`;
+        mutation { agregarCita(id_paciente: ${id_paciente}, id_medico: ${id_medico}, motivo: \"${motivo}\") {id_cita id_paciente id_medico motivo}}`;
 
                             const res = await fetch(URL, {
                                 method: "POST",
@@ -154,47 +152,44 @@
                             const data = await res.json();
                             console.log(data);
                             if (data) {
-                                alert(`Éxito: Paciente #${data.data.agregarPaciente.id_paciente} creado correctamente`);
+                                alert(`Éxito: Cita #${data.data.agregarCita.id_cita} creada correctamente`);
                                 ///Desactivar si se quiere ver el regreso de data
                                 location.reload()
                             } else {
-                                alert("Error: Paciente no creado");
+                                alert("Error: Cita no creada");
                             }
+
                         }
 
-                        crearPaciente();
+                        crearCitas();
                     });
 
                 </script>
 
 
-                <h2>Editar paciente</h2>
+                <h2>Editar cita</h2>
                 <form id="formUpdate">
+                    <label for="id_citaEdit">ID cita: </label>
+                    <input type="number" name="id_citaEdit" placeholder="ID cita" required><br>
 
-                    <label for="id_paciente_edit">ID paciente: </label>
-                    <input type="int" name="id_paciente_edit" placeholder="ID paciente"><br>
+                    <label for="id_pacienteEdit">ID Paciente: </label>
+                    <input type="number" name="id_pacienteEdit" placeholder="ID paciente" required><br>
 
-                    <label for="nombre_edit">Nombre: </label>
-                    <input type="text" name="nombre_edit" placeholder="Nombre paciente"><br>
+                    <label for="id_medicoEdit">ID Médico: </label>
+                    <input type="number" name="id_medicoEdit" placeholder="ID medico" required><br>
 
-                    <label for="dni_edit">DNI: </label>
-                    <input type="text" name="dni_edit" placeholder="DNI"><br>
-
-                    <label for="fecha_nacimiento_edit">Fecha de nacimiento: </label>
-                    <input type="text" name="fecha_nacimiento_edit" placeholder="Fecha de nacimiento"><br>
-
-                    <label for="telefono_edit">Telefeno: </label>
-                    <input type="text" name="telefono_edit" placeholder="Telefono"><br>
+                    <label for="motivoEdit">Motivo: </label>
+                    <input type="text" name="motivoEdit" placeholder="Motivo" required><br>
 
                     <button type="submit"> Actualizar </button><br>
                 </form>
                 <script>
-                    const inputIdPaciente = document.getElementsByName("id_paciente_edit")[0];
+                    const inputIdCita = document.getElementsByName("id_citaEdit")[0];
 
-                    inputIdPaciente.addEventListener("blur", function () {
-                        const id_paciente = this.value;
-                        const query = `query {pacienteID(id_paciente: ${id_paciente}) {nombre, dni, fecha_nacimiento, telefono}}`;
-                        if (id_paciente) {
+                    inputIdCita.addEventListener("blur", function () {
+                        const id_cita = this.value;
+                        const query = `query {citaID(id_cita: ${id_cita}) {id_paciente id_medico motivo}}`;
+                        if (id_cita) {
                             fetch(`http://localhost/Certificado/01.Git/Hospital/Proyect_Hospital/Parte 4 - GraphQL/GraphQL/index.php`, {
                                 method: 'POST',
                                 headers: { "Content-Type": "application/json" },
@@ -203,12 +198,11 @@
                                 .then(response => response.json())
                                 .then(result => {
                                     //console.log(result);
-                                    const empleado = result.data.pacienteID
-                                    if (empleado) {
-                                        document.getElementsByName("nombre_edit")[0].value = empleado.nombre;
-                                        document.getElementsByName("dni_edit")[0].value = empleado.dni;
-                                        document.getElementsByName("fecha_nacimiento_edit")[0].value = empleado.fecha_nacimiento;
-                                        document.getElementsByName("telefono_edit")[0].value = empleado.telefono;
+                                    const cita = result.data.citaID
+                                    if (cita) {
+                                        document.getElementsByName("id_pacienteEdit")[0].value = cita.id_paciente;
+                                        document.getElementsByName("id_medicoEdit")[0].value = cita.id_medico;
+                                        document.getElementsByName("motivoEdit")[0].value = cita.motivo;
                                     } else {
                                         alert("No se encontró ninguna cita con ese ID");
                                     }
@@ -220,15 +214,14 @@
                     document.getElementById("formUpdate").addEventListener("submit", function (e) {
                         e.preventDefault();
                         const URL = "http://localhost/Certificado/01.Git/Hospital/Proyect_Hospital/Parte 4 - GraphQL/GraphQL/index.php";
-                        const id_paciente = parseInt(this.id_paciente_edit.value);
-                        const nombre = this.nombre_edit.value;
-                        const dni = this.dni_edit.value;
-                        const fecha_nacimiento = this.fecha_nacimiento_edit.value;
-                        const telefono = this.telefono_edit.value;
+                        const id_cita = parseInt(this.id_citaEdit.value)
+                        const id_paciente = parseInt(this.id_pacienteEdit.value);
+                        const id_medico = parseInt(this.id_medicoEdit.value);
+                        const motivo = this.motivoEdit.value;
 
-                        async function actualizarPaciente() {
+                        async function actualizarCita() {
                             const query = `
-                        mutation {actualizarPaciente(id_paciente: ${id_paciente}, nombre: \"${nombre}\", dni: \"${dni}\", fecha_nacimiento: \"${fecha_nacimiento}\", telefono: \"${telefono}\") {id_paciente nombre dni fecha_nacimiento telefono}}`;
+        mutation { actualizarCita(id_cita: ${id_cita}, id_paciente: ${id_paciente}, id_medico: ${id_medico}, motivo: \"${motivo}\") {id_cita id_paciente id_medico motivo}}`;
 
                             const res = await fetch(URL, {
                                 method: "POST",
@@ -238,31 +231,26 @@
                             const data = await res.json();
                             console.log(data);
                             if (data) {
-                                alert(`Éxito: Paciente #${id_paciente} editado correctamente`);
+                                alert(`Éxito: Cita #${id_cita} editada correctamente`);
                                 //Desactivar si se quiere ver el regreso de data
                                 location.reload()
                             } else {
-                                alert("Error: Paciente no editado");
+                                alert("Error: Cita no editada");
                             }
                         }
-                        actualizarPaciente();
+                        actualizarCita();
                     });
                 </script>
 
-
-                <h2> Eliminar paciente </h2>
-
-                <p style="color: red"><b>Si el paciente tiene una cita, no se puede eliminar, la tabla puede que no
-                        tenga on
-                        delete casacade, eliminar la cita primero y después el paciente</b></p>
-                <input type="number" id="id_pacienteDelete" placeholder="ID paciente">
-                <button onclick="eliminarPaciente()"> Eliminar </button>
+                <h2> Eliminar cita </h2>
+                <input type="number" id="id_citaDelete" placeholder="ID cita">
+                <button onclick="eliminarCita()"> Eliminar </button>
                 <script>
-                    async function eliminarPaciente() {
+                    async function eliminarCita() {
                         const URL = "http://localhost/Certificado/01.Git/Hospital/Proyect_Hospital/Parte 4 - GraphQL/GraphQL/index.php";
 
-                        const id_paciente = parseInt(document.getElementById("id_pacienteDelete").value);
-                        const query = `mutation {eliminarPaciente(id_paciente: ${id_paciente})}`;
+                        const id_cita = parseInt(document.getElementById("id_citaDelete").value);
+                        const query = `mutation { eliminarCita(id_cita: ${id_cita})}`;
 
                         const res = await fetch(URL, {
                             method: "POST",
@@ -273,48 +261,49 @@
                         const data = await res.json();
                         console.log(data);
                         if (data) {
-                            alert(`Éxito: Paciente #${id_paciente} eliminado correctamente`);
+                            alert(`Éxito: Cita #${id_cita} eliminada correctamente`);
                             //Desactivar si se quiere ver el regreso de data
                             location.reload()
                         } else {
-                            alert("Error: Paciente no eliminado");
+                            alert("Error: Cita no eliminada");
                         }
                     }
                 </script>
+
             </div>
             <div class="list-container">
                 <h2>Lista de citas</h2>
-                <div id="containerPaciente"></div>
+                <div id="container"></div>
                 <script>
                     const URL = "http://localhost/Certificado/01.Git/Hospital/Proyect_Hospital/Parte 4 - GraphQL/GraphQL/index.php";
-                    async function obtenerPacientes() {
-                        const query = `query {paciente {id_paciente nombre dni fecha_nacimiento telefono}}`;
+                    async function obtenerCitas() {
+                        const query = `query {cita {id_cita id_paciente id_medico motivo
+                                        paciente {nombre} medico {nombre}}}`;
                         const res = await fetch(URL, {
                             method: "POST",
                             headers: { "Content-Type": "application/json" },
                             body: JSON.stringify({ query })
                         });
                         const response = await res.json();
-                        const pacientes = response.data.paciente;
-                        const divPacienteContainer = document.getElementById('containerPaciente');
+                        const citas = response.data.cita;
+                        const divCitaContainer = document.getElementById('container');
 
-                        pacientes.forEach(paciente => {
+                        citas.forEach(cita => {
 
                             const cardCita = document.createElement("div");
                             cardCita.className = "card_cita";
                             cardCita.innerHTML = `
-    <h2>ID PACIENTE: ${paciente.id_paciente}</h2>
-    <p>Nombre: ${paciente.nombre}</p>
-    <p>DNI: ${paciente.dni}</p>
-    <p>Fecha de nacimiento: ${paciente.fecha_nacimiento}</p>
-    <p>Telefono: ${paciente.telefono}</p>`;
-                            divPacienteContainer.appendChild(cardCita);
+                    <h2>ID CITA: ${cita.id_cita}</h2>
+                    <p>Paciente: #${cita.id_paciente} | ${cita.paciente.nombre}</p>
+                    <p>Médico: #${cita.id_medico} | ${cita.medico.nombre}</p>
+                    <p>Motivo: ${cita.motivo}</p>`;
+                            divCitaContainer.appendChild(cardCita);
 
                         });
 
-                        // console.log(response);
+                        //console.log(response);
                     }
-                    obtenerPacientes();
+                    obtenerCitas();
                 </script>
             </div>
         </div>

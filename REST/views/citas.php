@@ -73,6 +73,7 @@
 <body>
     <header>
         <h1>API-REST Citas</h1>
+        <a href="index.php">Volver al index</a>
     </header>
     <main>
         <!-- POST -->

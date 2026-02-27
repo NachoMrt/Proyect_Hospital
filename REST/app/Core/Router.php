@@ -1,75 +1,57 @@
 <?php
+class Router
+{
+    public function route($method, $uri, $data = null)
+    {
+        $parts = explode('/', trim($uri, '/'));
+        $resource = $parts[0] ?? null; // 'cita', 'paciente' o 'medico'
+        $id = $parts[1] ?? null;
 
-require_once __DIR__ . '/../Controllers/CitaController.php';
+        // Mapeo de rutas a controladores
+        $routes = [
+            'cita' => 'CitaController',
+            'paciente' => 'PacienteController',
+            'medico' => 'MedicoController'
+        ];
 
-// Define la clase Router que se encargará de analizar la URL y el método HTTP.
-class Router {
-    private $controller;
-
-    public function __construct() {
-        $this->controller = new CitaController();
-    }
-
-    /* Este es el método principal del Router.
-    Recibe:
-        $method → GET, POST, PUT, DELETE
-        $uri → ruta limpia (usuarios o usuarios/1)
-        $data → datos del body de POST/PUT (array PHP)
-    */
-    public function route($method, $uri, $data=null) {
-        /*
-        Separa la URL en partes usando /.
-            usuarios        → ['usuarios']
-            usuarios/1      → ['usuarios','1']
-        */
-        $parts = explode('/', trim($uri,'/'));  
-        if($parts[0] != 'cita') {
-            http_response_code(404);  // Si la primera parte de la URL no es 'usuarios', devuelve 404.
-                                                    // Esto evita que alguien llame a cualquier otra ruta y rompa tu API.
-            echo json_encode(['mensaje'=>'Ruta no encontrada']);  // json_encode: convierte un array o un objeto PHP en una cadena JSON.
+        if (!array_key_exists($resource, $routes)) {
+            http_response_code(404);
+            echo json_encode(['mensaje' => 'Recurso no encontrado']);
             return;
         }
 
-        // Si hay un segundo segmento en la URL (usuarios/1), lo guarda en $id.
-        //Si no existe (usuarios), $id = null.
-        $id = $parts[1] ?? null;
+        $controllerName = $routes[$resource];
+        require_once __DIR__ . "/../Controllers/$controllerName.php";
+        $controller = new $controllerName();
 
-        // Según el método HTTP, decide qué acción ejecutar en el controlador:
-        switch($method) {
+        switch ($method) {
             case 'GET':
-                $id ? $this->controller->show($id) : $this->controller->index(); // Si hay ID → muestra un usuario específico
-                                                                                    // Si no → devuelve todos los usuarios
+                $id ? $controller->show($id) : $controller->index();
                 break;
             case 'POST':
-                $this->controller->store($data);
+                $controller->store($data);
                 break;
             case 'PUT':
-                if(!$id) { http_response_code(400); echo json_encode(['mensaje'=>'ID requerido']); return;}
-                $this->controller->update($id, $data);
+                if (!$id) {
+                    http_response_code(400);
+                    echo json_encode(['mensaje' => 'ID requerido']);
+                    return;
+                }
+                $controller->update($id, $data);
                 break;
             case 'DELETE':
-                if(!$id) { http_response_code(400); echo json_encode(['mensaje'=>'ID requerido']); return;}
-                $this->controller->delete($id);
+                if (!$id) {
+                    http_response_code(400);
+                    echo json_encode(['mensaje' => 'ID requerido']);
+                    return;
+                }
+                $controller->delete($id);
                 break;
             default:
                 http_response_code(405);
-                echo json_encode(['mensaje'=>'Método no permitido']);
+                echo json_encode(['mensaje' => 'Método no permitido']);
         }
     }
-
 }
-
-/*
-Router.php es como el centro de control de la API:
-    Recibe la URL y método HTTP desde index.php
-    Limpia y separa la ruta (usuarios, usuarios/1)
-    Decide qué acción del controlador ejecutar
-    Devuelve la respuesta JSON al usuario
-    index.php → entrada
-    Router.php → dirige la petición
-    Controller → hace la lógica
-    Modelo → accede a la BD
-*/
-
 
 
